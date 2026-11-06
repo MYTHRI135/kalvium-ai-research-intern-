@@ -1,0 +1,13 @@
+{
+  "name": "lesson-lab",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A locally run, research-assisted lesson creation and quality review tool.",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
