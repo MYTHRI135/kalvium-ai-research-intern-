@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f6f2">
+  <title>Lesson Lab — Research, teach, refine</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Lesson Lab home">
+      <span class="brand-mark">L</span>
+      <span>Lesson Lab <small>RESEARCH TO CLASSROOM</small></span>
+    </a>
+    <div class="top-actions">
+      <span class="local-badge"><span></span> Saved in this browser</span>
+      <button class="button button-quiet" id="export-button" type="button" disabled>Export lesson</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="intro">
+      <div>
+        <p class="eyebrow">AI-ASSISTED LESSON WORKSPACE</p>
+        <h1>Research deeply.<br><span>Teach with confidence.</span></h1>
+        <p class="intro-copy">Turn a learning objective into a focused, 45-minute lesson—with research, two independent quality reviews, and room for your expertise.</p>
+      </div>
+      <aside class="time-card">
+        <span class="clock-icon" aria-hidden="true">◷</span>
+        <div><strong>45 minutes</strong><small>One complete learning session</small></div>
+      </aside>
+    </section>
+
+    <section class="workspace">
+      <aside class="setup-panel panel">
+        <div class="section-heading">
+          <span class="step-number">01</span>
+          <div><h2>Set your direction</h2><p>Start with the outcome you want learners to reach.</p></div>
+        </div>
+        <form id="lesson-form">
+          <label for="lesson-title">Lesson title</label>
+          <input id="lesson-title" name="title" maxlength="180" placeholder="e.g. HTTP Requests and Responses" required>
+          <label for="lesson-objective">Learning objective</label>
+          <textarea id="lesson-objective" name="objective" rows="4" maxlength="180" placeholder="By the end, learners will be able to…" required></textarea>
+          <div class="examples">
+            <button type="button" class="example-link" data-example="http">Use HTTP sample</button>
+            <button type="button" class="example-link" data-example="biology">Try another sample</button>
+          </div>
+          <button class="button button-primary generate-button" id="generate-button" type="submit">
+            <span class="button-label">Research &amp; create lesson</span><span aria-hidden="true">→</span>
+          </button>
+          <p class="form-note">Your saved draft stays in this browser, including while a retry is in progress.</p>
+          <div id="status-message" class="status-message" role="status" aria-live="polite"></div>
+        </form>
+
+        <div class="research-card">
+          <span class="research-icon" aria-hidden="true">⌕</span>
+          <div><strong>Research from multiple angles</strong><p>Web references, books, and YouTube learning resources. Review sources before teaching.</p></div>
+        </div>
+      </aside>
+
+      <section class="results-column" aria-label="Lesson workspace">
+        <div class="empty-state panel" id="empty-state">
+          <div class="empty-art" aria-hidden="true"><span>✳</span><i></i><b></b></div>
+          <p class="eyebrow">YOUR WORKSPACE IS READY</p>
+          <h2>A good lesson starts<br>with a clear outcome.</h2>
+          <p>Enter a title and learning objective to discover useful sources and build a lesson you can make your own.</p>
+          <div class="empty-steps"><span>01 &nbsp;Research</span><span>02 &nbsp;Review</span><span>03 &nbsp;Teach</span></div>
+        </div>
+
+        <div id="lesson-workspace" hidden>
+          <div class="results-topline">
+            <div><p class="eyebrow">YOUR LESSON WORKSPACE</p><h2 id="workspace-title">Lesson draft</h2></div>
+            <span class="draft-badge" id="draft-badge">DRAFT</span>
+          </div>
+
+          <div class="tab-bar" role="tablist" aria-label="Lesson sections">
+            <button class="tab-button is-active" role="tab" aria-selected="true" data-tab="lesson">Lesson <span id="source-count">0 sources</span></button>
+            <button class="tab-button" role="tab" aria-selected="false" data-tab="research">Research QC <span id="research-count">0</span></button>
+            <button class="tab-button" role="tab" aria-selected="false" data-tab="instructional">Teaching QC <span id="instructional-count">0</span></button>
+          </div>
+
+          <section class="tab-panel panel" id="tab-lesson">
+            <div class="editor-heading"><div><h3>Lesson content</h3><p>Preview your lesson or edit the draft. Changes save automatically.</p></div><div class="editor-actions"><button class="text-button is-selected" id="preview-toggle" type="button">Preview</button><button class="text-button" id="edit-toggle" type="button">Edit</button></div></div>
+            <textarea id="lesson-editor" aria-label="Editable lesson content" spellcheck="true" hidden></textarea>
+            <article id="lesson-preview" class="lesson-preview" hidden aria-label="Lesson preview"></article>
+            <div class="inline-notice" id="generation-notice" hidden></div>
+            <div class="subsection-heading"><div><span class="subsection-icon">↗</span><div><h3>Research library</h3><p>Open references and check their relevance before use.</p></div></div></div>
+            <div id="source-list" class="source-list"></div>
+          </section>
+
+          <section class="tab-panel panel" id="tab-research" hidden>
+            <div class="qc-heading"><span class="qc-icon qc-research">✓</span><div><h3>Research &amp; factual accuracy</h3><p>Independent review of evidence, claims, and source fit.</p></div></div>
+            <div id="research-report"></div>
+            <button class="button button-outline apply-button" data-apply="research" type="button">Apply research recommendations</button>
+          </section>
+          <section class="tab-panel panel" id="tab-instructional" hidden>
+            <div class="qc-heading"><span class="qc-icon qc-teaching">◎</span><div><h3>Instructional quality</h3><p>Independent review of alignment, clarity, and learning design.</p></div></div>
+            <div id="instructional-report"></div>
+            <button class="button button-outline apply-button" data-apply="instructional" type="button">Apply teaching recommendations</button>
+          </section>
+        </div>
+      </section>
+    </section>
+    <footer><span>LESSON LAB</span><span>Research is a starting point. Your professional judgment is the final quality check.</span></footer>
+  </main>
+  <script src="/app.js" defer></script>
+</body>
+</html>
